@@ -20,13 +20,13 @@ requirements:
     - numpy 1.11.*
     - cython
     - model_metadata
-    - sedflux3d
+    - sedflux
 
   run:
     - python
     - setuptools
     - pymt
-    - sedflux3d
+    - sedflux
 
 test:
   requires:
@@ -36,7 +36,7 @@ test:
     - sedflux3d
   commands:
     - mmd-stage Sedflux3d .
-    - bmi-test sedflux3d:Sedflux3d --infile=sedflux3d.txt
+    - bmi-test sedflux3d:Sedflux3d --infile=sedflux_3d_init.kvf
 
 about:
   summary: Python package that wraps the sedflux3d BMI.
