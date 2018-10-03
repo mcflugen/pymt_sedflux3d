@@ -1,2 +1,3 @@
 include versioneer.py
 include sedflux3d/_version.py
+include pymt_sedflux3d/_version.py

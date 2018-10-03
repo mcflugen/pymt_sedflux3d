@@ -2,10 +2,10 @@
 active:                                 yes
 logging:                                no
 repeat interval:                        always
-sea level file:                         {sea_level_file}
+sea level file:                         {{ sea_level_file }}
 
 [ compaction ]
-active:                                 {compaction_process_is_on}
+active:                                 {{ compaction_process_is_on }}
 logging:                                no
 repeat interval:                        25y
 
@@ -16,12 +16,12 @@ repeat interval:                        25y
 subsidence file:                        dummy.csv
 
 [ isostasy ]
-active:                                 {isostasy_process_is_on}
+active:                                 {{ isostasy_process_is_on }}
 logging:                                no
 repeat interval:                        25y
-effective elastic thickness (m):        {isostasy_effective_elastic_thickness}
-Youngs modulus (Pa):                    {isostasy_youngs_modulus}
-relaxation time (years):                {isostasy_relaxation_time}
+effective elastic thickness (m):        {{ isostasy_effective_elastic_thickness }}
+Youngs modulus (Pa):                    {{ isostasy_youngs_modulus }}
+relaxation time (years):                {{ isostasy_relaxation_time }}
 
 [ bbl ]
 active:                                 yes
@@ -63,7 +63,7 @@ method (diffusion|slope):               diffusion
 active:                                 yes
 logging:                                no
 repeat interval:                        always
-distance to dump bedload (m):           {bed_load_dump_length}
+distance to dump bedload (m):           {{ bed_load_dump_length }}
 ratio of flood plain to bedload rate:   0.0
 fraction of bedload retained in the delta plain: 0.0
 river name:                             po
@@ -81,9 +81,9 @@ logging:                                no
 repeat interval:                        always
 background ocean concentration:         0.
 velocity of coastal current (m/s):      normal=0,.5
-maximum plume width (km):               {plume_max_width}
-number of grid nodes in cross-shore:    {plume_cross_shore_nodes}
-number of grid nodes in river mouth:    {plume_river_mouth_nodes}
+maximum plume width (km):               {{ plume_max_width }}
+number of grid nodes in cross-shore:    {{ plume_cross_shore_nodes }}
+number of grid nodes in river mouth:    {{ plume_river_mouth_nodes }}
 
 ['measuring station']
 active:                                 no
