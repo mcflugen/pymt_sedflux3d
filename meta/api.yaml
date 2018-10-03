@@ -1,10 +1,4 @@
-name: Sedflux3D
-
+name: sedflux3d
 language: c
-register: register_bmi_sedflux3d
-includes:
-  - "#include <sedflux3d/bmi_sedflux3d.h>"
-cflags:
-  pkgconfig: sedflux3d
-libs:
-  pkgconfig: sedflux3d
+package: sedflux3d
+class: Sedflux3D
