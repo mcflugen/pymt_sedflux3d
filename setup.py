@@ -11,10 +11,14 @@ from distutils.extension import Extension
 try:
     import model_metadata
 except ImportError:
+
     def get_cmdclass(*args, **kwds):
         return kwds.get("cmdclass", None)
+
     def get_entry_points(*args):
         return None
+
+
 else:
     from model_metadata.utils import get_cmdclass, get_entry_points
 
@@ -22,30 +26,21 @@ else:
 import numpy as np
 
 
-include_dirs = [
-    np.get_include(),
-    os.path.join(sys.prefix, "include"),
-]
+include_dirs = [np.get_include(), os.path.join(sys.prefix, "include")]
 
 
-libraries = [
-        "bmi_sedflux3d",
-]
+libraries = ["bmi_sedflux3d"]
 
 
-library_dirs = [
-]
+library_dirs = []
 
 
-define_macros = [
-]
+define_macros = []
 
-undef_macros = [
-]
+undef_macros = []
 
 
-extra_compile_args = [
-]
+extra_compile_args = []
 
 
 ext_modules = [
@@ -63,19 +58,14 @@ ext_modules = [
 ]
 
 packages = find_packages()
-pymt_components = [
-    (
-"Sedflux3D=pymt_sedflux3d.lib:Sedflux3D",
-
-        "meta",
-    )
-]
+pymt_components = [("Sedflux3D=pymt_sedflux3d.lib:Sedflux3D", "meta")]
 
 setup(
     name="pymt_sedflux3d",
     author="Eric Hutton",
     description="PyMT plugin sedflux3d",
-    version=versioneer.get_version(),setup_requires=["cython"],
+    version=versioneer.get_version(),
+    setup_requires=["cython"],
     ext_modules=ext_modules,
     packages=packages,
     cmdclass=get_cmdclass(pymt_components, cmdclass=versioneer.get_cmdclass()),
