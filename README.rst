@@ -14,22 +14,60 @@ sedflux3d
         :alt: Documentation Status
 
 
-Python BMI for sedflux3d
+PyMT plugin for sedflux3d
 
 
 * Free software: MIT license
 * Documentation: https://sedflux3d.readthedocs.io.
 
 
-Features
---------
+---------------
+Installing pymt
+---------------
 
-* TODO
+Installing `pymt` from the `conda-forge` channel can be achieved by adding
+`conda-forge` to your channels with:
 
-Credits
--------
+.. code::
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+  conda config --add channels conda-forge
 
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+*Note*: Before installing `pymt`, you may want to create a separate environment
+into which to install it. This can be done with,
+
+.. code::
+
+  conda create -n pymt python=3.6
+  conda activate pymt
+
+Once the `conda-forge` channel has been enabled, `pymt` can be installed with:
+
+.. code::
+
+  conda install pymt
+
+It is possible to list all of the versions of `pymt` available on your platform with:
+
+.. code::
+
+  conda search pymt --channel conda-forge
+
+-------------------------
+Installing pymt_sedflux3d
+-------------------------
+
+Once `pymt` is installed, the dependencies of `pymt_sedflux3d` can
+be installed with:
+
+.. code::
+
+  conda install sedflux
+
+Until `pymt_sedflux3d` is available on `conda-forge`, it must
+by installed from source,
+
+.. code::
+
+  git clone https://github.com/mcflugen/pymt_sedflux3d
+  cd pymt_sedflux3d
+  python setup.py install

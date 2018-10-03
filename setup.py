@@ -1,14 +1,25 @@
 #! /usr/bin/env python
-import os, sys
+import os
+import sys
 
-from setuptools import setup, find_packages
-
-# from Cython.Build import cythonize
-from distutils.extension import Extension
 import numpy as np
 import versioneer
+from setuptools import find_packages, setup
 
-from model_metadata.utils import get_cmdclass, get_entry_points
+from distutils.extension import Extension
+
+try:
+    import model_metadata
+except ImportError:
+    def get_cmdclass(*args, **kwds):
+        return kwds.get("cmdclass", None)
+    def get_entry_points(*args):
+        return None
+else:
+    from model_metadata.utils import get_cmdclass, get_entry_points
+
+
+import numpy as np
 
 
 include_dirs = [
@@ -39,8 +50,8 @@ extra_compile_args = [
 
 ext_modules = [
     Extension(
-        "sedflux3d._sedflux3d",
-        ["sedflux3d/_sedflux3d.pyx"],
+        "pymt_sedflux3d.lib._bmi",
+        ["pymt_sedflux3d/lib/_bmi.pyx"],
         language="c",
         include_dirs=include_dirs,
         libraries=libraries,
@@ -51,21 +62,20 @@ ext_modules = [
     )
 ]
 
-
-packages = find_packages(include=["sedflux3d"])
+packages = find_packages()
 pymt_components = [
     (
-        "Sedflux3d=sedflux3d:Sedflux3d",
+"Sedflux3D=pymt_sedflux3d.lib:Sedflux3D",
+
         "meta",
     )
 ]
 
 setup(
-    name="sedflux3d",
+    name="pymt_sedflux3d",
     author="Eric Hutton",
-    description="Python interface to sedflux3d",
-    version=versioneer.get_version(),
-    setup_requires=["cython"],
+    description="PyMT plugin sedflux3d",
+    version=versioneer.get_version(),setup_requires=["cython"],
     ext_modules=ext_modules,
     packages=packages,
     cmdclass=get_cmdclass(pymt_components, cmdclass=versioneer.get_cmdclass()),

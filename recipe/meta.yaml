@@ -3,40 +3,43 @@
 {% set build = "0" %}
 
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: "pymt_sedflux3d"
+  version: {{ data.get('version') }}
 
 source:
   path: ..
 
 build:
-  number: {{ build }}
-  script: python -m pip install --no-deps --ignore-installed .
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
 
 requirements:
+  build:
+    - {{ compiler('c') }}
   host:
     - python
-    - setuptools
-    - numpy 1.11.*
+    - pip
     - cython
+    - numpy 1.11.*
     - model_metadata
-    - sedflux
+    - sedflux 
 
   run:
     - python
-    - setuptools
+    - {{ pin_compatible('numpy') }}
     - pymt
-    - sedflux
+    - sedflux 
 
 test:
   requires:
     - bmi-tester
+    - model_metadata
   imports:
     - pymt
-    - sedflux3d
+    - pymt_sedflux3d
   commands:
-    - mmd-stage Sedflux3d .
-    - bmi-test sedflux3d:Sedflux3d --infile=sedflux_3d_init.kvf
+    - config_file=$(mmd-stage Sedflux3D . > MANIFEST && mmd-query Sedflux3D --var=run.config_file.path)
+    - bmi-test pymt_sedflux3d.bmi:Sedflux3D --infile=$config_file --manifest=MANIFEST -v
 
 about:
   summary: Python package that wraps the sedflux3d BMI.
